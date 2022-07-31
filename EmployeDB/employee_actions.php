@@ -87,3 +87,16 @@ if ('DELETE_EMP' == $action) {
     $conn->close();
     return;
 }
+
+if ("CHECK_ID" == $action) {
+    $sql = "SELECT `id` FROM $table WHERE = '$emp_id')";
+    $result = $conn->query($sql);
+    if($result != '') {
+        echo "succes";
+    }else{
+        echo "error";
+    }
+
+    $conn->close();
+    return;
+}
