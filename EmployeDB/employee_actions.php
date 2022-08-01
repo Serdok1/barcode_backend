@@ -49,15 +49,15 @@ if ("GET_ALL" == $action) {
 if ("ADD_EMP" == $action) {
 
     $sql = "INSERT INTO `$table` (`id`, `first_name`, `last_name`) VALUES ( '$emp_id', '$first_name', '$last_name')";
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql) === true) {
         echo "New record created successfully";
-      } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-      }
-    /* if ($conn->query($sql) === true) {
-        echo "succes";
     } else {
-        echo "error";
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    /* if ($conn->query($sql) === true) {
+    echo "succes";
+    } else {
+    echo "error";
     } */
     $conn->close();
     return;
@@ -89,14 +89,16 @@ if ('DELETE_EMP' == $action) {
 }
 
 if ("CHECK_ID" == $action) {
-    $sql = "SELECT `id` FROM $table WHERE = '$emp_id')";
+    $sql = "SELECT * FROM `$table` WHERE `id` = $emp_id";
     $result = $conn->query($sql);
-    if($result != '') {
-        echo "succes";
-    }else{
-        echo "error";
-    }
+    $count = mysqli_num_rows($result);
 
+      if ($count>0) {
+    echo "exist";
+    } else {
+    echo "notexist";
+    }
+ 
     $conn->close();
     return;
 }
