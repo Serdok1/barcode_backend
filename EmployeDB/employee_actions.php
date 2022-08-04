@@ -29,23 +29,6 @@ if ("CREATE_TABLE" == $action) {
     return;
 }
 
-if ("GET_ALL" == $action) {
-    $db_data = array();
-    $sql = "SELECT id, first_name, last_name from $table ORDER BY id DESC";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $db_data[] = $row;
-        }
-
-        echo json_encode($db_data);
-    } else {
-        echo "error";
-    }
-    $conn->close();
-    return;
-}
-
 if ("ADD_EMP" == $action) {
 
     $sql = "INSERT INTO `$table` (`id`, `first_name`, `last_name`) VALUES ( '$emp_id', '$first_name', '$last_name')";
@@ -98,6 +81,16 @@ if ("CHECK_ID" == $action) {
     } else {
     echo "notexist";
     }
+ 
+    $conn->close();
+    return;
+}
+
+if ("GET_ID" == $action) {
+    $sql = "SELECT * FROM `history`";
+    $result = $conn->query($sql);
+
+    echo $result;
  
     $conn->close();
     return;
