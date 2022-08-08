@@ -9,6 +9,8 @@ $action = $_POST["action"];
 $emp_id = $_POST['emp_id'];
 $first_name = $_POST["first_name"];
 $last_name = $_POST["last_name"];
+$id = $_POST['id'];
+$dateTime = $_POST['dateTime'];
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -45,6 +47,24 @@ if ("ADD_EMP" == $action) {
     $conn->close();
     return;
 }
+
+if ("ADD_HISTORY" == $action) {
+
+    $sql = "INSERT INTO `history` (`id`, `dateTime`) VALUES ( '$id', '$dateTime')";
+    if ($conn->query($sql) === true) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    /* if ($conn->query($sql) === true) {
+    echo "succes";
+    } else {
+    echo "error";
+    } */
+    $conn->close();
+    return;
+}
+
 
 if ("UPDATE_EMP" == $action) {
     $emp_id = $_POST['$emp_id'];
